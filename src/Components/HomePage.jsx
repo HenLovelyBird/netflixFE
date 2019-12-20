@@ -19,13 +19,26 @@ class Main extends React.Component {
             {/* <TestLifeCycle /> */}
 
             <Container flex>
-                {this.state.movies.map((movie, index) =>
-                    <MovieList movies={movie.items} key={index} title={movie.Title} />)}
+                {this.state.movies && this.state.movies.map((movie, index) =>
+                    <MovieList movies={movie} key={index} title={movie.Title} movieGenre={movie.Type} img={movie.Poster}/>)}
                 {/* <MovieList movies={this.state.movies} title="Harry Potter"></MovieList> */}
                 {/* {this.state.movies.map((movie, index) => <img className="col-md-3" alt={"movie poster for" + movie.Title} src={movie.Poster} key={index} />)} */}
             </Container>
         </>);
     }
+
+    componentDidMount = async () => {
+        const resp = await fetch ("http://netflixbefe.herokuapp.com/movies",{
+            method: "GET"
+            
+        })
+        const moviesFromBE = await resp.json();
+        console.log(moviesFromBE);
+        this.setState({
+            movies: moviesFromBE
+        });
+    }
+
 
     // componentDidMount = async () => {
     //     let movieTitles = ["Avengers"];
@@ -40,7 +53,7 @@ class Main extends React.Component {
     //         });
     //     }
 
-    
+
     }
 
     //search result goes here

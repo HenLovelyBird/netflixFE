@@ -11,9 +11,14 @@ class MovieList extends React.Component {
             <Row>
                 <h3>{this.props.title}</h3>
             <Row>
-                {this.props.movies.map((movie, index) =>
-                <MovieDetails movie={movie} key={index} />
-                )}
+            <div className="col-md-3">
+               <img style={{width: "100%"}} 
+                src={this.props.movies.Poster} 
+                alt={"movie poster for" + this.props.movies.Title} />
+                <span>{this.props.movies.Title}</span> 
+            </div>
+                {/* {this.props.movies && this.props.movies.map((movie, index) =>
+                <MovieDetails movie={movie} key={index} /> */}
             </Row>
         </Row>
     </>);
